@@ -13,8 +13,15 @@ add_subdirectory(glxw)
 include_directories(glfw/include)
 include_directories(glm)
 include_directories(${CMAKE_BINARY_DIR}/glxw/include)
- 
-set(CMAKE_CXX_FLAGS "-O2 -Wall -Wextra")
+
+
+set(CMAKE_CXX_FLAGS "-O2")
+
+# Set default compile flags for GCC
+if(CMAKE_COMPILER_IS_GNUCXX)
+    message(STATUS "GCC detected, adding compile flags")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
+endif(CMAKE_COMPILER_IS_GNUCXX)
 SET(LIBRARIES glfw glxw ${GLFW_LIBRARIES} ${GLXW_LIBRARY} ${OPENGL_LIBRARY} ${CMAKE_DL_LIBS})
 
 link_directories (${OPENGLEXAMPLES_BINARY_DIR}/bin)
